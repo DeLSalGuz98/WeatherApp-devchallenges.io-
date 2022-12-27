@@ -1,0 +1,124 @@
+.section-left{
+    background-color: #1E213A;
+    width: 100%;
+    height: 100vh;
+}
+/* --------------  header section -------------*/
+.header-section{
+    width: 100%;
+    height: 10%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.btn{
+    font-size: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px 15px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-circle{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.btn-color{
+    background-color: #6E707A;
+    color: #fff;
+}
+/* --------------  img section -------------*/
+.img-section{
+    width: 100%;
+    height: 40%;
+    position: relative;
+}
+.background-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.background-img img{
+    width: 100%;
+    height: 100%;
+    opacity: 20%;
+    object-fit: cover;
+}
+.icon-img{
+    width: fit-content;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 20%;
+    padding: 50px 0;
+}
+/* --------------  description section -------------*/
+.description-section{
+    width: 100%;
+    height: 50%;
+}
+.temperature-description{
+    width: 100%;
+    height: fit-content;
+    color: #E7E7EB;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.number-temperature-desription{
+    font-weight: 500;
+    font-size: 122px;
+}
+.scale-temperature-desription{
+    font-weight: 100;
+    font-size: 48px;
+}
+
+.wheather-description{
+    width: 100%;
+    height: 25%;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    color: #A09FB1;
+}
+.date-city-description{
+    width: 100%;
+    height: 25%;
+    color: #88869D;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+}
+.date-city-description p{
+    margin-bottom: 15px;
+}
+@media(max-width:350px){
+    .number-temperature-desription{
+        font-weight: 500;
+        font-size: 100px;
+    }
+    .scale-temperature-desription{
+        font-weight: 100;
+        font-size: 28px;
+    }
+}
+
+@media (min-width:768px) and (max-width:1365px){
+}
+
+@media (min-width:1366px){
+
+}
