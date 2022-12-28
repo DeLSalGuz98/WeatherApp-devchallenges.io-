@@ -116,9 +116,12 @@
     }
 }
 
-@media (min-width:768px) and (max-width:1365px){
+@media (min-width:768px) and (max-width:1023px){
 }
 
-@media (min-width:1366px){
-
+@media (min-width:1024px){
+    .section-left{
+    background-color: #1E213A;
+    width: 100%;
+}
 }

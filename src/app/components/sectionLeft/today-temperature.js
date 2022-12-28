@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import MontsAndWeeks from './daysAndMonths';
+import React, { useContext, useEffect, useState } from 'react';
+import { ConvertDateToString } from "../../services/daysAndMonths";
+import { GetTodayWeather } from "../../services/getDataApi";
+import './todayTemperature.css'
+import { nameCityContext } from '../../context/nameCityContext';
 
-import '../styles/todayTemperature.css'
-
-export function TodayTemperature({dataWeather}) {
+export function TodayTemperature() {
+    const nameCity = useContext(nameCityContext);
     const [today, setToday] = useState("");
+    const [dataWeather, setDdataWeather] = useState({
+        cityName: "",
+        currentTemperature: "",
+        weatherSituation : "",
+        imageDirection: ""
+    });
+
     useEffect(()=>{
         GetTodayDate();
-        //console.log(dataWeather);
+        GetWeather();
     },[]);
 
     const DeployNav = ()=>{
@@ -18,13 +27,16 @@ export function TodayTemperature({dataWeather}) {
     }
     const GetTodayDate = ()=>{        
         let todayDate = new Date();
-
-        let day = MontsAndWeeks.dayWeek[todayDate.getDay()];
-        let date = todayDate.getDate();
-        let month = MontsAndWeeks.montsName[todayDate.getMonth()];
-
-        setToday(`${day}. ${date} ${month}`)
-        
+        setToday(ConvertDateToString(todayDate));        
+    }
+    const GetWeather = async()=>{
+        const data = await GetTodayWeather(nameCity);
+        setDdataWeather({...dataWeather,
+            cityName: data.cityName,
+            currentTemperature: data.currentTemperature,
+            weatherSituation : data.weatherSituation,
+            imageDirection: data.imageDirection
+        });
     }
     return(
         <section className="section-left">

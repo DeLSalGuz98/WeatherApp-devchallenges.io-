@@ -1,0 +1,17 @@
+
+.today-description-weather .title{
+    width: 100%;
+    height: 5%;
+    padding: 15px 10px;
+    font-size: 24px;
+    color: #E7E7EB;
+}
+.today-description-weather .today-weather-cards{    
+    width: 100%;
+    height: 90%;
+    padding: 10px;
+}
+.today-description-weather .today-weather-cards .today-cards{
+    width: 100%;
+    height: 100%;
+}

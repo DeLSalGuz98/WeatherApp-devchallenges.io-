@@ -1,88 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React, {useState } from "react"
+import { NameCityContextProvider } from "./context/nameCityContext";
 
-import {TodayTemperature} from './components/today-temperature'
+import {TodayTemperature} from './components/sectionLeft/today-temperature'
+import { WeatherSection } from "./components/sectionRigth/weatherSection";
 
-const dlsgApiKey = "b4005826d03fec8a043849646980b840";
-
-function GetIcons(key) {
-    let imageDirection= "";
-    switch (key) {
-        case "few clouds":
-                imageDirection = "./img/LightCloud.png";
-            break;
-        case "clear sky":
-                imageDirection = "./img/Clear.png";
-            break;
-        case "scattered clouds":
-                imageDirection = "./img/HeavyCloud.png";
-            break;
-        case "broken clouds":
-                imageDirection = "./img/HeavyCloud.png";
-            break;
-        case "overcast clouds":
-                imageDirection = "./img/HeavyCloud.png";
-            break;
-        case "shower rain":
-                imageDirection = "./img/HeavyRain.png";
-            break;
-        case "light rain":
-                imageDirection = "./img/LightRain.png";
-            break;
-        case "moderate rain":
-                imageDirection = "./img/Shower.png";
-            break;
-        case "rain":
-                imageDirection = "./img/Shower.png";
-            break;
-        case "thunderstorm":
-                imageDirection = "./img/Thunderstorm.png";
-            break;
-        case "snow":
-                imageDirection = "./img/Snow.png";
-            break;
-    
-        default:
-            break;
-    }
-    return imageDirection;
-}
 
 export function App() {
-    const [dataTodayWeather, setDataTodayWeather] = useState({
-        cityName: "",
-        currentTemperature: "",
-        weatherSituation : "",
-        imageDirection: ""
-    });
-    const [nameCitySearch, setNameCitySearch] = useState("lima")
-
-    useEffect(()=>{
-        GetTodayWeather();
-    },[]);
-
-    const GetTodayWeather = ()=>{
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=${dlsgApiKey}&units=metric`)
-        .then(res => res.json())
-        .then(data => {
-            let iconWeather = GetIcons(data.weather[0].description);
-            setDataTodayWeather({...dataTodayWeather,
-                cityName: data.name,
-                currentTemperature: data.main.temp,
-                weatherSituation : data.weather[0].main,
-                imageDirection: iconWeather
-            });
-        })
-        .catch(err => console.log(err));
-    }
+    const [nameCitySearch, setNameCitySearch] = useState("cusco");
     return(
-        <>
-            <TodayTemperature
-                dataWeather = {dataTodayWeather}
-            />
-            <section className="section-rigth">
-                <h2>hola</h2>
-            </section>
-        </>
+        <NameCityContextProvider value={nameCitySearch}>
+            <TodayTemperature/>
+            <WeatherSection/>
+        </NameCityContextProvider>
     )
 }
 
