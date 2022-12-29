@@ -1,0 +1,16 @@
+.card-days-section{
+    width: 100%;
+    height: auto;
+    padding: 15px 5px;
+}
+.cards-days{
+    display: grid;
+    grid-template-columns: repeat(2, 120px);
+    grid-gap: 32px 26px;
+    grid-auto-rows: 170px;
+    padding: 10px 20px;
+    width: min-content;
+    height: auto;
+    margin: 0 auto;
+
+}

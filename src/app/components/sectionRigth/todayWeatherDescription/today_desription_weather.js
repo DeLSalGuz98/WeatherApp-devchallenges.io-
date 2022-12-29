@@ -1,10 +1,39 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from "react";
 import { DescriptionWeatherCard } from './descriptionWeatherCard/description_weather_card';
 import './descriptionWeather.css'
+import { GetTodayWeather } from "../../../services/getDataApi";
+import { nameCityContext } from "../../../context/nameCityContext";
 
-export function TodayDescriptionWeather({windNumber, windDirection, humidityNumber, pressureNumber, visibilityNumber}) {
+export function TodayDescriptionWeather() {
+    const {nameCity} = useContext(nameCityContext);
+    const [todayWeatherDescription, setTodayWeatherDescription] = useState({
+        windNumber: "",
+        humidityNumber: "",
+        pressureNumber : "",
+        visibilityNumber: "",
+        windDirection: ""
+    });
+    useEffect(()=>{
+        CityNameUpdated();
+    },[nameCity]);
+    
+    const CityNameUpdated = ()=>{
+        if(nameCity !== ""){
+            GetWeather();
+        }
+    }
+    const GetWeather = async()=>{
+        const data = await GetTodayWeather(nameCity);
+        setTodayWeatherDescription({...todayWeatherDescription,
+            windNumber: data.windNumber,
+            humidityNumber: data.humidityNumber,
+            pressureNumber : data.pressureNumber,
+            visibilityNumber: data.visibilityNumber,
+            windDirection: data.windDirection
+        });
+    }
     return(
-        <>
+        <div className="today-description-weather">
             <div className="title">
                 <p>Today's Hightlights</p>
             </div>
@@ -13,12 +42,12 @@ export function TodayDescriptionWeather({windNumber, windDirection, humidityNumb
                     <DescriptionWeatherCard
                         classNameCardDescription="wind-status-card"
                         titleCard="Wind Status"
-                        number={windNumber}
+                        number={todayWeatherDescription.windNumber}
                         extention="mph"
                     >
                         <div className="wind-direction">
                             <div className="direction-container">
-                                <a href="#" style={{transform: windDirection}}>
+                                <a href="#" style={{transform: todayWeatherDescription.windDirection}}>
                                     <i className="fas fa-location-arrow"></i>
                                 </a>
                                 <p>wsw</p>
@@ -28,7 +57,7 @@ export function TodayDescriptionWeather({windNumber, windDirection, humidityNumb
                     <DescriptionWeatherCard
                         classNameCardDescription="humidity-card"
                         titleCard="Humidity"
-                        number={humidityNumber}
+                        number={todayWeatherDescription.humidityNumber}
                         extention="%"
                     >
                         <div className="percent-bar">
@@ -39,7 +68,7 @@ export function TodayDescriptionWeather({windNumber, windDirection, humidityNumb
                             </div>
                             <div className="bar">
                                 <div className="bar-container">
-                                    <div className="gradual-bar" style={{width: humidityNumber}}>
+                                    <div className="gradual-bar" style={{width: todayWeatherDescription.humidityNumber}}>
     
                                     </div>
                                 </div>
@@ -50,13 +79,13 @@ export function TodayDescriptionWeather({windNumber, windDirection, humidityNumb
                     <DescriptionWeatherCard
                         classNameCardDescription="visibility-card"
                         titleCard="Visibility"
-                        number={visibilityNumber}
+                        number={todayWeatherDescription.visibilityNumber}
                         extention="miles"
                     ></DescriptionWeatherCard>
                     <DescriptionWeatherCard
                         classNameCardDescription="air-pressure-card"
                         titleCard="Air Pressure"
-                        number={pressureNumber}
+                        number={todayWeatherDescription.pressureNumber}
                         extention="mb"
                     ></DescriptionWeatherCard>
                 </div>
@@ -64,7 +93,7 @@ export function TodayDescriptionWeather({windNumber, windDirection, humidityNumb
             <div className="credits">
                 <p>Denilson @ DevChallenges.io</p>
             </div>
-        </>
+        </div>
     
     );
 }

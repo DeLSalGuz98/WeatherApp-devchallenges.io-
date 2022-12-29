@@ -1,0 +1,52 @@
+.nav-deploy{
+    position: absolute;
+    top: 0;
+    left: 0;
+    position: fixed;
+    transition: left 1s;
+    -webkit-transition: left 1s;
+    -moz-transition: left 1s;
+    -ms-transition: left 1s;
+    -o-transition: left 1s;
+}
+.nav-undeploy{
+    position: absolute;
+    top: 0;
+    left: -100%;
+    transition: left 1s;
+    -webkit-transition: left 1s;
+    -moz-transition: left 1s;
+    -ms-transition: left 1s;
+    -o-transition: left 1s;
+}
+.section-nav{
+    width: 100%;
+    height: 100vh;
+    background-color: #1E213A;
+    z-index: 2;
+}
+
+
+
+/* .section-nav .nav-citys-section{
+    width: 100%;
+    height: 60%;
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.section-nav .nav-citys-section::-webkit-scrollbar{
+    width: 2px;
+    background: transparent;
+}
+.section-nav .nav-citys-section:hover::-webkit-scrollbar-thumb{
+    width: 2px;
+    background: #A09FB1;
+}
+.section-nav .nav-citys-section .city-selected{
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    color: #E7E7EB;
+    padding: 15px 10px;
+} */

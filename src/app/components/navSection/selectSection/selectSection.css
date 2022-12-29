@@ -1,0 +1,63 @@
+.section-nav .nav-select-section{
+    width: 100%;
+    height: 10%;
+    padding: 10px 13px;
+}
+.select-container{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #616475;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+    cursor: pointer;
+}
+.option-selected{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #616475;
+}
+.name-city{
+    color: #E7E7EB;
+    font-size: 16px;
+}
+.options{
+    display: block;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background-color: #100E1D;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.options::-webkit-scrollbar{
+    width: 2px;
+    background: transparent;
+}
+.options:hover::-webkit-scrollbar-thumb{
+    width: 2px;
+    background: #A09FB1;
+}
+
+
+.section-nav .nav-select-section .select-container .options .name-city{
+    width: 100%;
+    height: 46px;
+    padding: 15px;
+    color: #E7E7EB;
+    transition: color, background-color, .5s ;
+    -webkit-transition: color, background-color, .5s ;
+    -moz-transition: color, background-color, .5s ;
+    -ms-transition: color, background-color, .5s ;
+    -o-transition: color, background-color, .5s ;
+}
+.section-nav .nav-select-section .select-container .options .name-city:hover{
+    
+    color: #100E1D;
+    background-color: #616475;
+}

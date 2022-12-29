@@ -2,12 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ConvertDateToString } from "../../services/daysAndMonths";
 import { GetTodayWeather } from "../../services/getDataApi";
 import './todayTemperature.css'
+
 import { nameCityContext } from '../../context/nameCityContext';
+import { navContext } from '../../context/navContext';
+
 
 export function TodayTemperature() {
-    const nameCity = useContext(nameCityContext);
+    const {nameCity, setNameCity} = useContext(nameCityContext);
+    const {setStatusNav} = useContext(navContext)
+
     const [today, setToday] = useState("");
-    const [dataWeather, setDdataWeather] = useState({
+    const [dataWeather, setDataWeather] = useState({
         cityName: "",
         currentTemperature: "",
         weatherSituation : "",
@@ -15,12 +20,20 @@ export function TodayTemperature() {
     });
 
     useEffect(()=>{
-        GetTodayDate();
-        GetWeather();
-    },[]);
+        CityNameUpdated();      
+    },[nameCity]);
+
+    const CityNameUpdated = ()=>{
+        if(nameCity !== ""){
+            GetTodayDate();
+            GetWeather();
+        }else{
+            setNameCity("cusco");
+        }
+    }
 
     const DeployNav = ()=>{
-        console.log('navbar');
+        setStatusNav(true)
     }
     const GetUserLocation = ()=>{
         console.log('get location')
@@ -31,7 +44,7 @@ export function TodayTemperature() {
     }
     const GetWeather = async()=>{
         const data = await GetTodayWeather(nameCity);
-        setDdataWeather({...dataWeather,
+        setDataWeather({...dataWeather,
             cityName: data.cityName,
             currentTemperature: data.currentTemperature,
             weatherSituation : data.weatherSituation,
