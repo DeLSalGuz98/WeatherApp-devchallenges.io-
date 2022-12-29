@@ -44,6 +44,7 @@ export function TodayTemperature() {
     const GetUserLocation = async(e)=>{
         e.preventDefault();
         const {lat, lon} = await GetGeolocation()
+        console.log({lat: lat, lon: lon})
         const data = await GetWeatherByLocation(lat, lon)
         setDataWeather({...dataWeather,
             cityName: data.cityName,

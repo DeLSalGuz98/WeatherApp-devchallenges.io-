@@ -20,6 +20,21 @@ const ConvertData = (data)=>{
         windDirection: `rotate(${windDir}deg)`
     }
 }
+const ArrayNextDays = (data)=>{
+    const nextWeather = []
+    for (let i = 6; i < data.list.length; i+=8) {
+        const Weather = {
+            id: data.list[i].dt,
+            dayName: i===6? "Tomorrow" : ConvertDateToString(data.list[i].dt_txt),
+            iconWeather: GetIcons(data.list[i].weather[0].description),
+            iconWeatherName: data.list[i].weather[0].description,
+            maxTemp: data.list[i].main.temp_max.toFixed(1),
+            minTemp: data.list[i].main.temp_min.toFixed(1)
+        }
+        nextWeather.push(Weather)
+    }
+    return nextWeather;
+}
 export const GetTodayWeather = async(nameCitySearch)=>{
     try {
         const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=${dlsgApiKey}&units=metric`);
@@ -42,6 +57,29 @@ export const GetWeatherNextDays = async (nameCitySearch)=>{
     try {
         const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${nameCitySearch}&units=metric&appid=${dlsgApiKey}`);
         const data = await res.json();
+        
+        // const nextWeather = []
+        // for (let i = 6; i < data.list.length; i+=8) {
+        //     const Weather = {
+        //         id: data.list[i].dt,
+        //         dayName: i===6? "Tomorrow" : ConvertDateToString(data.list[i].dt_txt),
+        //         iconWeather: GetIcons(data.list[i].weather[0].description),
+        //         iconWeatherName: data.list[i].weather[0].description,
+        //         maxTemp: data.list[i].main.temp_max.toFixed(1),
+        //         minTemp: data.list[i].main.temp_min.toFixed(1)
+        //     }
+        //     nextWeather.push(Weather)
+        // }
+        return ArrayNextDays();
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const GetWeatherNextDaysByLocation = async (lat, lon)=>{
+    try {
+        const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${dlsgApiKey}`);
+        const data = await res.json();
         const nextWeather = []
         for (let i = 6; i < data.list.length; i+=8) {
             const Weather = {
@@ -61,9 +99,19 @@ export const GetWeatherNextDays = async (nameCitySearch)=>{
     }
 }
 
+// {lat: -13.5206, lon: -71.9759}
+
+// http://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=b4005826d03fec8a043849646980b840&units=metric
+// http://api.openweathermap.org/data/2.5/weather?lat=-13.5206&lon=-71.9759&appid=b4005826d03fec8a043849646980b840&units=metric
+
+// http://api.openweathermap.org/data/2.5/forecast?q=cusco&units=metric&appid=b4005826d03fec8a043849646980b840
+// http://api.openweathermap.org/data/2.5/forecast?lat=-13.5206&lon=-71.9759&units=metric&appid=b4005826d03fec8a043849646980b840
+
+
+
 
 //     GetWeatherByLocation(lati, long){
-//         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=${dlsgApiKey}&units=metric`)
+//         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=b4005826d03fec8a043849646980b840&units=metric`)
 //         .then(res => res.json())
 //         .then(data => {
 //             console.log(data);
