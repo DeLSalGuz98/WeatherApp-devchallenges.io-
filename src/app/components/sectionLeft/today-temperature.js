@@ -6,19 +6,21 @@ import './todayTemperature.css'
 
 import { nameCityContext } from '../../context/nameCityContext';
 import { navContext } from '../../context/navContext';
+import { dataWeatherContext } from '../../context/dataWeatherContext';
 
 
 export function TodayTemperature() {
     const {nameCity, setNameCity} = useContext(nameCityContext);
+    const {dataWeather, setDataWeather} = useContext(dataWeatherContext)
     const {setStatusNav} = useContext(navContext)
 
     const [today, setToday] = useState("");
-    const [dataWeather, setDataWeather] = useState({
-        cityName: "",
-        currentTemperature: "",
-        weatherSituation : "",
-        imageDirection: ""
-    });
+    // const [dataWeather, setDataWeather] = useState({
+    //     cityName: "",
+    //     currentTemperature: "",
+    //     weatherSituation : "",
+    //     imageDirection: ""
+    // });
 
     useEffect(()=>{
         CityNameUpdated();      
@@ -29,7 +31,7 @@ export function TodayTemperature() {
             GetTodayDate();
             GetWeather();
         }else{
-            setNameCity("lima");
+            setNameCity("cusco");
         }
     }
 
@@ -56,12 +58,19 @@ export function TodayTemperature() {
 
     const GetWeather = async()=>{
         const data = await GetTodayWeather(nameCity);
+        console.log(data.nextDays);
         setDataWeather({...dataWeather,
             cityName: data.cityName,
             currentTemperature: data.currentTemperature,
             weatherSituation : data.weatherSituation,
-            imageDirection: data.imageDirection
-        });
+            imageDirection: data.imageDirection,
+            windNumber: data.windNumber,
+            humidityNumber: data.humidityNumber,
+            pressureNumber : data.pressureNumber,
+            visibilityNumber: data.visibilityNumber,
+            windDirection: data.windDirection,
+            nextDays: data.nextDays
+        })
     }
     return(
         <section className="section-left">

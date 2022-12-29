@@ -3,7 +3,7 @@ import { ConvertDateToString } from "./daysAndMonths";
 
 const dlsgApiKey = "b4005826d03fec8a043849646980b840";
 
-const ConvertData = (data)=>{
+const ConvertData = (data, nextDays)=>{
     let iconWeather = GetIcons(data.weather[0].description);
     let windMph = (data.wind.speed * 2.236934).toFixed(1);
     let milles = (data.visibility / 1609.34).toFixed(1);
@@ -17,7 +17,8 @@ const ConvertData = (data)=>{
         humidityNumber: data.main.humidity,
         pressureNumber : data.main.pressure,
         visibilityNumber: milles,
-        windDirection: `rotate(${windDir}deg)`
+        windDirection: `rotate(${windDir}deg)`,
+        nextDays: nextDays
     }
 }
 const ArrayNextDays = (data)=>{
@@ -39,7 +40,8 @@ export const GetTodayWeather = async(nameCitySearch)=>{
     try {
         const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=${dlsgApiKey}&units=metric`);
         const data = await res.json();
-        return ConvertData(data)
+        const nextDays = await GetWeatherNextDays(nameCitySearch)
+        return ConvertData(data, nextDays)
     } catch (error) {
         console.log(error)
     }

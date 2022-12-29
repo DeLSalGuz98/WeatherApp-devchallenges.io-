@@ -1,6 +1,7 @@
 import React from "react"
 import { NameCityContextProvider } from "./context/nameCityContext";
 import { NavContextProvider } from "./context/navContext";
+import { DataWeatherContextProvider } from "./context/dataWeatherContext";
 
 import {TodayTemperature} from './components/sectionLeft/today-temperature'
 import { WeatherSection } from "./components/sectionRigth/weatherSection";
@@ -10,14 +11,16 @@ import { NavSection } from "./components/navSection/nav_section";
 export function App() {
     
     return(
-        <NameCityContextProvider>
-            <NavContextProvider>    
-                <NavSection/>
-                <TodayTemperature/>
-            </NavContextProvider>
-            <WeatherSection/>
-        </NameCityContextProvider>
-    )
+        <DataWeatherContextProvider>
+            <NameCityContextProvider>
+                <NavContextProvider>    
+                    <NavSection/>
+                    <TodayTemperature/>
+                </NavContextProvider>
+                <WeatherSection/>
+            </NameCityContextProvider>
+        </DataWeatherContextProvider>
+        )
 }
 
 // class App extends React.Component{

@@ -1,30 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import './cardDaysSection.css'
 import { CardDaysWeather } from "../cardDaysSection/cardDays/card_days_weather";
-import { GetWeatherNextDays } from "../../../services/getDataApi";
-import { nameCityContext } from "../../../context/nameCityContext";
+import { dataWeatherContext } from "../../../context/dataWeatherContext";
 
 export function CardDaysSection() {
-    const {nameCity} = useContext(nameCityContext);
-    const [nextDays, setNextDays] = useState([]);
-
-    useEffect(()=>{
-        CityNameUpdated();
-    },[nameCity]);
-    const CityNameUpdated = ()=>{
-        if(nameCity !== ""){
-            WeatherNexDays();
-        }
-    }
-
-    const WeatherNexDays = async()=>{
-        setNextDays(await GetWeatherNextDays(nameCity));        
-    }
+    const {dataWeather} = useContext(dataWeatherContext)
     return(
         <div className="card-days-section">
             <div className="cards-days">
                 {
-                    nextDays.map(day =>{
+                    dataWeather.nextDays.map(day =>{
                         return(
                             <CardDaysWeather
                                 key={day.id}
