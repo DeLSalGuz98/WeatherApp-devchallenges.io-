@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { NameCityContextProvider } from "./context/nameCityContext";
 import { NavContextProvider } from "./context/navContext";
 
@@ -8,7 +8,6 @@ import { NavSection } from "./components/navSection/nav_section";
 
 
 export function App() {
-    const [nameCitySearch, setNameCitySearch] = useState("cusco");
     
     return(
         <NameCityContextProvider>

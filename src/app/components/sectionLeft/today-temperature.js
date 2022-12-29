@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ConvertDateToString } from "../../services/daysAndMonths";
-import { GetTodayWeather } from "../../services/getDataApi";
+import { GetTodayWeather, GetWeatherByLocation } from "../../services/getDataApi";
+import { GetGeolocation } from '../../services/getGeolocation';
 import './todayTemperature.css'
 
 import { nameCityContext } from '../../context/nameCityContext';
@@ -28,20 +29,30 @@ export function TodayTemperature() {
             GetTodayDate();
             GetWeather();
         }else{
-            setNameCity("cusco");
+            setNameCity("lima");
         }
     }
 
     const DeployNav = ()=>{
         setStatusNav(true)
     }
-    const GetUserLocation = ()=>{
-        console.log('get location')
-    }
     const GetTodayDate = ()=>{        
         let todayDate = new Date();
         setToday(ConvertDateToString(todayDate));        
     }
+
+    const GetUserLocation = async(e)=>{
+        e.preventDefault();
+        const {lat, lon} = await GetGeolocation()
+        const data = await GetWeatherByLocation(lat, lon)
+        setDataWeather({...dataWeather,
+            cityName: data.cityName,
+            currentTemperature: data.currentTemperature,
+            weatherSituation : data.weatherSituation,
+            imageDirection: data.imageDirection
+        });        
+    }
+
     const GetWeather = async()=>{
         const data = await GetTodayWeather(nameCity);
         setDataWeather({...dataWeather,
@@ -81,6 +92,65 @@ export function TodayTemperature() {
         </section>
     )
 }
+
+//     GetUserLocation(){
+//         this.GetGeolocation().then(res =>{
+//             //console.log(res);
+//             this.GetWeatherByLocation(res.lat, res.lon);
+//         })
+//         .catch((err)=>{
+//             alert(err);
+//         })
+//     }
+//     GetGeolocation(){
+//         const promesa = new Promise((resolve, reject)=>{
+//             navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+//             function successCallback(position){   
+//                 lat = position.coords.latitude;
+//                 lon = position.coords.longitude;
+//                 resolve({lat, lon});            
+//             }
+
+//             function errorCallback(error) {
+//                 const message = 'ERROR(' + error.code + '): ' + error.message;
+//                 console.warn(message);
+//                 reject(message);
+//             }
+//         });
+//         return promesa;
+//     }
+//     GetWeatherByLocation(lati, long){
+//         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=${dlsgApiKey}&units=metric`)
+//         .then(res => res.json())
+//         .then(data => {
+//             console.log(data);
+//             //let temper = (data.main.temp).toFixed();
+//             let milles = (data.visibility / 1609.34).toFixed(1);
+//             let windMph = (data.wind.speed * 2.236934).toFixed(1);
+//             let windDir = (data.wind.deg - 45);
+
+//             let iconWeather = GetIcons(data.weather[0].description);
+//             this.setState({
+//                 cityName: data.name,
+//                 currentTemperature: data.main.temp,
+//                 weatherSituation: data.weather[0].main,
+//                 imageDirection: iconWeather,
+//                 windNumber: windMph,
+//                 humidityNumber: data.main.humidity,
+//                 pressureNumber: data.main.pressure,
+//                 visibilityNumber: milles,
+//                 windDirection: `rotate(${windDir}deg)`,
+
+//                 nameCitySearch: data.name
+//             });
+//         })
+//         .then(()=>{
+//             this.GetWeatherNextsDays();
+//         })
+//         .catch(err => console.log(err));
+        
+//     }
 
 // class TodayTemperature extends React.Component {
 //     constructor(props){

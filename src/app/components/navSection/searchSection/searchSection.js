@@ -11,7 +11,8 @@ export function SearchSection() {
 
     const SearchCityWeather = ()=>{
         setNameCity(city);
-        setStatusNav(false)
+        setStatusNav(false);
+        setCity("");
     }
     const handleChange = (e)=>{
         setCity(e.target.value)
@@ -20,7 +21,7 @@ export function SearchSection() {
         <div className="nav-search-section">
             <div className="search-container">
                 <i className="fas fa-search"></i>
-                <input type="text" placeholder="search location" onChange={handleChange}/>
+                <input type="text" placeholder="search location" onChange={handleChange} value={city}/>
             </div>
             <button onClick={SearchCityWeather}>Search</button>
         </div>
