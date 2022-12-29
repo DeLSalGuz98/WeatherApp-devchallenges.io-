@@ -51,13 +51,18 @@ export function TodayTemperature() {
             cityName: data.cityName,
             currentTemperature: data.currentTemperature,
             weatherSituation : data.weatherSituation,
-            imageDirection: data.imageDirection
-        });        
+            imageDirection: data.imageDirection,
+            windNumber: data.windNumber,
+            humidityNumber: data.humidityNumber,
+            pressureNumber : data.pressureNumber,
+            visibilityNumber: data.visibilityNumber,
+            windDirection: data.windDirection,
+            nextDays: data.nextDays
+        })       
     }
 
     const GetWeather = async()=>{
         const data = await GetTodayWeather(nameCity);
-        console.log(data.nextDays);
         setDataWeather({...dataWeather,
             cityName: data.cityName,
             currentTemperature: data.currentTemperature,
