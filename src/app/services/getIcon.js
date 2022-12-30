@@ -38,6 +38,7 @@ export function GetIcons(key) {
                 imageDirection = "./img/HeavyCloud.png";
             break;
         default:
+                imageDirection = "./img/HeavyCloud.png";
             break;
     }
     return imageDirection;
