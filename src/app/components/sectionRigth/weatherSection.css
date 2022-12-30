@@ -1,6 +1,16 @@
 .section-rigth{
     background-color: #100E1D;
     width: 100%;
-    height: auto;
-    border: solid 1px yellow;
+    height: fit-content;
+}
+@media (min-width: 1024px) {
+    .section-rigth{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container{
+        height: 90vh;
+    }
 }

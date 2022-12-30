@@ -9,9 +9,11 @@ import { CardDaysSection } from "./cardDaysSection/cardDaysSection";
 export function WeatherSection() {
     return(
         <section className="section-rigth">
-            <ChangeGrades/>
-            <CardDaysSection/>
-            <TodayDescriptionWeather/>
+            <div className="container">
+                <ChangeGrades/>
+                <CardDaysSection/>
+                <TodayDescriptionWeather/>
+            </div>
         </section>
     )
 }

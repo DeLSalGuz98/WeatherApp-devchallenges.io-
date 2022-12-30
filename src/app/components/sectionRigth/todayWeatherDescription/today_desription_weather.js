@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { DescriptionWeatherCard } from './descriptionWeatherCard/description_weather_card';
 import './descriptionWeather.css'
-// import { GetTodayWeather } from "../../../services/getDataApi";
-// import { nameCityContext } from "../../../context/nameCityContext";
 import { dataWeatherContext } from "../../../context/dataWeatherContext";
 
 export function TodayDescriptionWeather() {
@@ -22,7 +20,7 @@ export function TodayDescriptionWeather() {
                     >
                         <div className="wind-direction">
                             <div className="direction-container">
-                                <a href="#" style={{transform: dataWeather.windDirection}}>
+                                <a className="icon-wind" href="#" style={{transform: dataWeather.windDirection}}>
                                     <i className="fas fa-location-arrow"></i>
                                 </a>
                                 <p>wsw</p>
@@ -43,7 +41,7 @@ export function TodayDescriptionWeather() {
                             </div>
                             <div className="bar">
                                 <div className="bar-container">
-                                    <div className="gradual-bar" style={{width: dataWeather.humidityNumber}}>
+                                    <div className="gradual-bar" style={{width: `${dataWeather.humidityNumber}%`}}>
     
                                     </div>
                                 </div>
@@ -66,7 +64,7 @@ export function TodayDescriptionWeather() {
                 </div>
             </div>
             <div className="credits">
-                <p>Denilson @ DevChallenges.io</p>
+                <p>Created by Denilson @ DevChallenges.io</p>
             </div>
         </div>
     

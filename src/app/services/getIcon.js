@@ -34,7 +34,9 @@ export function GetIcons(key) {
         case "snow":
                 imageDirection = "./img/Snow.png";
             break;
-    
+        case "mist":
+                imageDirection = "./img/HeavyCloud.png";
+            break;
         default:
             break;
     }
