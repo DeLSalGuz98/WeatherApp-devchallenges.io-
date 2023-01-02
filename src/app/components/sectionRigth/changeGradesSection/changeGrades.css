@@ -1,4 +1,32 @@
 .change-grades-section{
     display: none;
-    border: solid 1px yellow;
+}
+@media (min-width: 1024px){
+    .change-grades-section{
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        font-size: 16px;
+        height: 3em;
+        margin-bottom: 1em;
+    }
+    .btn-grades{
+        font-weight: bold;
+        border: none;
+        font-size:  1em;
+        width: 2em;
+        height: 2em;
+        margin-right:1em;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        background-color: #e7e6ea;
+        color: #585676;
+    }
+    .btn-selected{
+        background-color: #585676;
+        color: #e7e6ea;
+    }
 }

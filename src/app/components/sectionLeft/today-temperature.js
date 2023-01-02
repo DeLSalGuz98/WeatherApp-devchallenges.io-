@@ -15,14 +15,11 @@ export function TodayTemperature() {
     const {setStatusNav} = useContext(navContext)
 
     const [today, setToday] = useState("");
-    // const [dataWeather, setDataWeather] = useState({
-    //     cityName: "",
-    //     currentTemperature: "",
-    //     weatherSituation : "",
-    //     imageDirection: ""
-    // });
-
+    const [grades, setGrades] = useState('°C');
     useEffect(()=>{
+        if(localStorage.getItem('gradesFar') === 'true'){
+            setGrades('°F')
+        }
         CityNameUpdated();      
     },[nameCity]);
 
@@ -31,7 +28,7 @@ export function TodayTemperature() {
             GetTodayDate();
             GetWeather();
         }else{
-            setNameCity("cusco");
+            setNameCity("españa");
         }
     }
 
@@ -52,13 +49,18 @@ export function TodayTemperature() {
             cityName: data.cityName,
             currentTemperature: data.currentTemperature,
             weatherSituation : data.weatherSituation,
-            imageDirection: data.imageDirection
-        });        
+            imageDirection: data.imageDirection,
+            windNumber: data.windNumber,
+            humidityNumber: data.humidityNumber,
+            pressureNumber : data.pressureNumber,
+            visibilityNumber: data.visibilityNumber,
+            windDirection: data.windDirection,
+            nextDays: data.nextDays
+        })       
     }
 
     const GetWeather = async()=>{
         const data = await GetTodayWeather(nameCity);
-        console.log(data.nextDays);
         setDataWeather({...dataWeather,
             cityName: data.cityName,
             currentTemperature: data.currentTemperature,
@@ -89,7 +91,7 @@ export function TodayTemperature() {
             <div className="description-section">
                 <div className="temperature-description">
                     <p className="number-temperature-desription">{dataWeather.currentTemperature}</p>
-                    <p className="scale-temperature-desription">°c</p>
+                    <p className="scale-temperature-desription">{grades}</p>
                 </div>
                 <div className="wheather-description">
                     <p>{dataWeather.weatherSituation}</p>

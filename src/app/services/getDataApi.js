@@ -3,14 +3,25 @@ import { ConvertDateToString } from "./daysAndMonths";
 
 const dlsgApiKey = "b4005826d03fec8a043849646980b840";
 
+const converToFarrenhei = (tem)=>{
+    if(localStorage.getItem('gradesFar') === 'true'){
+        const far = (1.8 * tem) + 32;
+        return far.toFixed(1)
+    }else{  
+        return tem   
+    }
+}
+
 const ConvertData = (data, nextDays)=>{
     let iconWeather = GetIcons(data.weather[0].description);
     let windMph = (data.wind.speed * 2.236934).toFixed(1);
     let milles = (data.visibility / 1609.34).toFixed(1);
-    let windDir = (data.wind.deg - 45)
+    let windDir = (data.wind.deg - 45);
+    let temperature = converToFarrenhei(data.main.temp);
+    
     return{
         cityName: data.name,
-        currentTemperature: data.main.temp,
+        currentTemperature: temperature,
         weatherSituation : data.weather[0].main,
         imageDirection: iconWeather,
         windNumber: windMph,
@@ -21,7 +32,8 @@ const ConvertData = (data, nextDays)=>{
         nextDays: nextDays
     }
 }
-const ArrayNextDays = (data)=>{
+
+const ArrayWeather = (data)=>{
     const nextWeather = []
     for (let i = 6; i < data.list.length; i+=8) {
         const Weather = {
@@ -29,13 +41,13 @@ const ArrayNextDays = (data)=>{
             dayName: i===6? "Tomorrow" : ConvertDateToString(data.list[i].dt_txt),
             iconWeather: GetIcons(data.list[i].weather[0].description),
             iconWeatherName: data.list[i].weather[0].description,
-            maxTemp: data.list[i].main.temp_max.toFixed(1),
-            minTemp: data.list[i].main.temp_min.toFixed(1)
+            maxTemp: converToFarrenhei(data.list[i].main.temp_max.toFixed(1)),
+            minTemp: converToFarrenhei(data.list[i].main.temp_min.toFixed(1))
         }
         nextWeather.push(Weather)
     }
-    return nextWeather;
-}
+    return nextWeather
+} 
 export const GetTodayWeather = async(nameCitySearch)=>{
     try {
         const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=${dlsgApiKey}&units=metric`);
@@ -46,100 +58,35 @@ export const GetTodayWeather = async(nameCitySearch)=>{
         console.log(error)
     }
 }
-export const GetWeatherByLocation = async(lat, lon)=>{
-    try {
-        const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${dlsgApiKey}&units=metric`)
-        const data = await res.json();
-        return ConvertData(data)
-    } catch (error) {
-        console.log(error)
-    }
-}
 export const GetWeatherNextDays = async (nameCitySearch)=>{
     try {
         const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${nameCitySearch}&units=metric&appid=${dlsgApiKey}`);
         const data = await res.json();
-        
-        // const nextWeather = []
-        // for (let i = 6; i < data.list.length; i+=8) {
-        //     const Weather = {
-        //         id: data.list[i].dt,
-        //         dayName: i===6? "Tomorrow" : ConvertDateToString(data.list[i].dt_txt),
-        //         iconWeather: GetIcons(data.list[i].weather[0].description),
-        //         iconWeatherName: data.list[i].weather[0].description,
-        //         maxTemp: data.list[i].main.temp_max.toFixed(1),
-        //         minTemp: data.list[i].main.temp_min.toFixed(1)
-        //     }
-        //     nextWeather.push(Weather)
-        // }
-        return ArrayNextDays();
+        return ArrayWeather(data);
 
     } catch (error) {
         console.log(error);
+    }
+}
+
+
+
+export const GetWeatherByLocation = async(lat, lon)=>{
+    try {
+        const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${dlsgApiKey}&units=metric`)
+        const data = await res.json();
+        const nextDays = await GetWeatherNextDaysByLocation(lat, lon)
+        return ConvertData(data, nextDays)
+    } catch (error) {
+        console.log(error)
     }
 }
 export const GetWeatherNextDaysByLocation = async (lat, lon)=>{
     try {
         const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${dlsgApiKey}`);
         const data = await res.json();
-        const nextWeather = []
-        for (let i = 6; i < data.list.length; i+=8) {
-            const Weather = {
-                id: data.list[i].dt,
-                dayName: i===6? "Tomorrow" : ConvertDateToString(data.list[i].dt_txt),
-                iconWeather: GetIcons(data.list[i].weather[0].description),
-                iconWeatherName: data.list[i].weather[0].description,
-                maxTemp: data.list[i].main.temp_max.toFixed(1),
-                minTemp: data.list[i].main.temp_min.toFixed(1)
-            }
-            nextWeather.push(Weather)
-        }
-        return nextWeather;
-
+        return ArrayWeather(data);
     } catch (error) {
         console.log(error);
     }
 }
-
-// {lat: -13.5206, lon: -71.9759}
-
-// http://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=b4005826d03fec8a043849646980b840&units=metric
-// http://api.openweathermap.org/data/2.5/weather?lat=-13.5206&lon=-71.9759&appid=b4005826d03fec8a043849646980b840&units=metric
-
-// http://api.openweathermap.org/data/2.5/forecast?q=cusco&units=metric&appid=b4005826d03fec8a043849646980b840
-// http://api.openweathermap.org/data/2.5/forecast?lat=-13.5206&lon=-71.9759&units=metric&appid=b4005826d03fec8a043849646980b840
-
-
-
-
-//     GetWeatherByLocation(lati, long){
-//         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=b4005826d03fec8a043849646980b840&units=metric`)
-//         .then(res => res.json())
-//         .then(data => {
-//             console.log(data);
-//             //let temper = (data.main.temp).toFixed();
-//             let milles = (data.visibility / 1609.34).toFixed(1);
-//             let windMph = (data.wind.speed * 2.236934).toFixed(1);
-//             let windDir = (data.wind.deg - 45);
-
-//             let iconWeather = GetIcons(data.weather[0].description);
-//             this.setState({
-//                 cityName: data.name,
-//                 currentTemperature: data.main.temp,
-//                 weatherSituation: data.weather[0].main,
-//                 imageDirection: iconWeather,
-//                 windNumber: windMph,
-//                 humidityNumber: data.main.humidity,
-//                 pressureNumber: data.main.pressure,
-//                 visibilityNumber: milles,
-//                 windDirection: `rotate(${windDir}deg)`,
-
-//                 nameCitySearch: data.name
-//             });
-//         })
-//         .then(()=>{
-//             this.GetWeatherNextsDays();
-//         })
-//         .catch(err => console.log(err));
-        
-//     }

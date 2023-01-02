@@ -4,7 +4,7 @@ import './descriptionWeatherCard.css'
 export function DescriptionWeatherCard({classNameCardDescription, titleCard, number, extention, children}) {
     return(
         <>
-            <div className={classNameCardDescription}>
+            <div className={` card-description-weather ${classNameCardDescription}`}>
                 <div className="title-card">
                     <p>{titleCard}</p>
                 </div>

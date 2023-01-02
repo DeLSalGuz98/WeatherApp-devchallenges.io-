@@ -1,16 +1,26 @@
 .card-days-section{
+    font-size: 16px;
     width: 100%;
-    height: auto;
-    padding: 15px 5px;
+    height: fit-content;
+    padding-top: 2em;
 }
 .cards-days{
-    display: grid;
-    grid-template-columns: repeat(2, 120px);
-    grid-gap: 32px 26px;
-    grid-auto-rows: 170px;
-    padding: 10px 20px;
-    width: min-content;
-    height: auto;
     margin: 0 auto;
-
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-auto-rows: max-content;
+    gap: 1em;
+}
+@media (min-width: 500px) {
+    .cards-days{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}@media (min-width: 1024px) {
+    .card-days-section{
+        padding-top: 0;
+    }
 }

@@ -11,15 +11,17 @@ import { NavSection } from "./components/navSection/nav_section";
 export function App() {
     
     return(
-        <DataWeatherContextProvider>
-            <NameCityContextProvider>
-                <NavContextProvider>    
-                    <NavSection/>
-                    <TodayTemperature/>
-                </NavContextProvider>
-                <WeatherSection/>
-            </NameCityContextProvider>
-        </DataWeatherContextProvider>
+        <div className="App">
+            <DataWeatherContextProvider>
+                <NameCityContextProvider>
+                    <NavContextProvider>    
+                        <NavSection/>
+                        <TodayTemperature/>
+                    </NavContextProvider>
+                    <WeatherSection/>
+                </NameCityContextProvider>
+            </DataWeatherContextProvider>
+        </div>
         )
 }
 

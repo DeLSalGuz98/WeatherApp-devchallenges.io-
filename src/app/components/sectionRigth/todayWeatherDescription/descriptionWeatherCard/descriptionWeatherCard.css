@@ -1,133 +1,113 @@
-.wind-status-card{
-    width: 100%;
-    height: 204px;
+.card-description-weather{
+    font-size: 16px;
     background-color: #1E213A;
-    color: #fff;
-    padding: 17px;
-    margin: 15px 0;
+    color: #ffffff;
+    width: 100%;
+    height: max-content;
+    margin-top: 1em;
+    padding: 1em 0 .5em 0; 
+}
+.wind-status-card{
+    height: 11em;
 }
 .humidity-card{
-    width: 100%;
-    height: 204px;
-    background-color: #1E213A;
-    color: #fff;
-    padding: 17px;
-    margin: 15px 0;
+    height: 11em;
 }
 .visibility-card{
-    width: 100%;
-    height: 159px;
-    background-color: #1E213A;
-    color: #fff;
-    padding: 17px;
-    margin: 15px 0;
+    height: 10em;
 }
 .air-pressure-card{
-    width: 100%;
-    height: 160px;
-    background-color: #1E213A;
-    color: #fff;
-    padding: 17px;
-    margin: 15px 0;
+    height: 10em;
 }
 
 
 .title-card{
-    width: 100%;
-    height: 30px;
     text-align: center;
-    padding: 5px;
-    font-size: 16px;
+    font-size: 1em;
     color: #E7E7EB;
 }
 .description-card{
     width: 100%;
-    height: 80px;
-    text-align: center;
-}
-.description-card p{
-    display: inline-block;
+    height: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 .description-card .card-number{
-    font-size: 64px;
+    font-size: 4em;
 }
 .description-card .card-extention{
-    font-size: 36px;
+    font-size: 2em;
 }
 
-.wind-status-card .wind-direction{
-    width: 100%;
-    height: 60px;
+
+.wind-direction{
+    height: 3.75em;
+    padding-top: 1em;
 }
-.wind-status-card .wind-direction .direction-container{
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 10px 0;
+.direction-container{
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
-.wind-status-card .wind-direction .direction-container a{
-    display: inline-block;
-    width: 35px;
-    height: 35px;
-    font-size: 15px;
-    border-radius: 50%;
+.icon-wind{
+    padding: .5em;
     background-color: rgba(255, 255, 255, 0.3);
+    color: #E7E7EB;
     text-decoration: none;
-    color: #E7E7EB;
+    width: 2em;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 50%;
     transform: rotate(-45deg);
-    padding: 10px;
     transition: transfomr, 1s;
-    
-
 }
-.wind-status-card .wind-direction .direction-container p{
-    display: inline-block;
+.direction-container p{
     font-size: 20px;
-    color: #E7E7EB;
     margin: 0 10px;
 }
 
-.humidity-card .percent-bar{
+
+.percent-bar{
     width: 80%;
-    height: 60px;
     margin: 0 auto;
 }
-.humidity-card .percent-bar .numbers{
+.numbers{
     width: 100%;
-    display: inline-flex;
+    display: flex;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 1em;
     color: #A09FB1
 }
-.humidity-card .percent-bar .bar{
-    width: 100%;
-    height: 30px;
+.bar{
+    height: 2em;
 }
-.humidity-card .percent-bar .bar .bar-container{
+.bar-container{
     width: 100%;
-    height: 8px;
+    height: .4em;
     border-radius: 25px;
     background-color: #E7E7EB;
-
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
 }
-.humidity-card .percent-bar .bar .bar-container .gradual-bar{
+.gradual-bar{
     width: 100%;
     height: 100%;
     border-radius: 25px;
     background-color: #FFEC65;
     transition: 1s;
 }
-.humidity-card .percent-bar .bar p{
+.bar p{
     float: right;
-    font-size: 12px;
+    font-size: .8em;
     color: #E7E7EB;
 }
 
-.today-description-weather .credits{
-    width: 100%;
-    height: 5%;
-    font-size: 14px;
-    color: #616475;
-    text-align: center;
+@media (min-width: 800px){
+    .card-description-weather{
+        margin-top: 0;
+        font-size: 13px;
+    }
 }

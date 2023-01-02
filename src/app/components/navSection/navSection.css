@@ -25,28 +25,8 @@
     background-color: #1E213A;
     z-index: 2;
 }
-
-
-
-/* .section-nav .nav-citys-section{
-    width: 100%;
-    height: 60%;
-    padding: 10px;
-    overflow-x: hidden;
-    overflow-y: scroll;
+@media (min-width:1024px) {
+    .section-nav{
+        width: 30%;
+    }
 }
-.section-nav .nav-citys-section::-webkit-scrollbar{
-    width: 2px;
-    background: transparent;
-}
-.section-nav .nav-citys-section:hover::-webkit-scrollbar-thumb{
-    width: 2px;
-    background: #A09FB1;
-}
-.section-nav .nav-citys-section .city-selected{
-    width: 100%;
-    height: 50px;
-    font-size: 16px;
-    color: #E7E7EB;
-    padding: 15px 10px;
-} */
