@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const localPort = "3000";
-const pcServer = '192.168.1.133';
 
 const path = require('path');
 
