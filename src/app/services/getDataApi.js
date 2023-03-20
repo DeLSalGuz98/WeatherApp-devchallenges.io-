@@ -50,7 +50,7 @@ const ArrayWeather = (data)=>{
 } 
 export const GetTodayWeather = async(nameCitySearch)=>{
     try {
-        const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=${dlsgApiKey}&units=metric`);
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${nameCitySearch}&appid=${dlsgApiKey}&units=metric`);
         const data = await res.json();
         const nextDays = await GetWeatherNextDays(nameCitySearch)
         return ConvertData(data, nextDays)
@@ -60,7 +60,7 @@ export const GetTodayWeather = async(nameCitySearch)=>{
 }
 export const GetWeatherNextDays = async (nameCitySearch)=>{
     try {
-        const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${nameCitySearch}&units=metric&appid=${dlsgApiKey}`);
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${nameCitySearch}&units=metric&appid=${dlsgApiKey}`);
         const data = await res.json();
         return ArrayWeather(data);
 
@@ -73,7 +73,7 @@ export const GetWeatherNextDays = async (nameCitySearch)=>{
 
 export const GetWeatherByLocation = async(lat, lon)=>{
     try {
-        const res = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${dlsgApiKey}&units=metric`)
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${dlsgApiKey}&units=metric`)
         const data = await res.json();
         const nextDays = await GetWeatherNextDaysByLocation(lat, lon)
         return ConvertData(data, nextDays)
@@ -83,7 +83,7 @@ export const GetWeatherByLocation = async(lat, lon)=>{
 }
 export const GetWeatherNextDaysByLocation = async (lat, lon)=>{
     try {
-        const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${dlsgApiKey}`);
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${dlsgApiKey}`);
         const data = await res.json();
         return ArrayWeather(data);
     } catch (error) {
